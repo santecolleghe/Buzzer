@@ -1,3 +1,22 @@
+const { google } = require('googleapis');
+const API_KEY = process.env.GDRIVE_API_KEY || 'INSERISCI_LA_TUA_API_KEY';
+
+// Endpoint per stream diretto da Google Drive
+app.get('/api/file/:id', async (req, res) => {
+  const fileId = req.params.id;
+  try {
+    const drive = google.drive({ version: 'v3', auth: API_KEY });
+    const fileRes = await drive.files.get({
+      fileId,
+      alt: 'media',
+      key: API_KEY
+    }, { responseType: 'stream' });
+    res.setHeader('Content-Type', 'audio/mpeg');
+    fileRes.data.pipe(res);
+  } catch (err) {
+    res.status(500).json({ error: 'Impossibile scaricare il file da Google Drive' });
+  }
+});
 
 const express = require('express');
 const path = require('path');
