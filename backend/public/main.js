@@ -9,8 +9,9 @@ fetch('/api/files')
       btn.textContent = file.name;
       btn.className = 'btn btn-light btn-list';
       btn.onclick = () => {
-        // Link pubblico Google Drive per file audio (visualizzazione, non download)
-        const audioUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
+        // Link visualizzazione Google Drive
+        const audioUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
+        const viewUrl = `https://drive.google.com/file/d/${file.id}/view?usp=sharing`;
         let audio = document.getElementById('audio-player');
         if (!audio) {
           audio = document.createElement('audio');
@@ -18,6 +19,9 @@ fetch('/api/files')
           audio.controls = true;
           root.appendChild(audio);
         }
+        audio.onerror = () => {
+          window.open(viewUrl, '_blank');
+        };
         audio.src = audioUrl;
         audio.play();
       };
