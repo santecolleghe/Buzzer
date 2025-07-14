@@ -1,0 +1,21 @@
+{
+  "name": "buzzer-backend",
+  "version": "1.0.0",
+  "description": "Backend Node.js per Buzzer, pronto per Render",
+  "main": "api/app.js",
+  "scripts": {
+    "start": "node api/app.js",
+    "dev": "nodemon api/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "googleapis": "^152.0.0",
+    "sequelize": "^6.35.1",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2"
+  }
+}
