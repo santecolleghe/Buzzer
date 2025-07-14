@@ -1,5 +1,10 @@
+
+const express = require('express');
+const path = require('path');
 const { google } = require('googleapis');
 const API_KEY = process.env.GDRIVE_API_KEY || 'INSERISCI_LA_TUA_API_KEY';
+const gdriveService = require('../services/gdrive/listFiles');
+const app = express();
 
 // Endpoint per stream diretto da Google Drive
 app.get('/api/file/:id', async (req, res) => {
@@ -17,11 +22,6 @@ app.get('/api/file/:id', async (req, res) => {
     res.status(500).json({ error: 'Impossibile scaricare il file da Google Drive' });
   }
 });
-
-const express = require('express');
-const path = require('path');
-const gdriveService = require('../services/gdrive/listFiles');
-const app = express();
 
 // Serve Angular app dal base path
 app.use(express.static(path.join(__dirname, '../public')));
