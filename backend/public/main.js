@@ -7,9 +7,10 @@ fetch('/api/files')
     files.forEach(file => {
       const btn = document.createElement('button');
       btn.textContent = file.name;
+      btn.className = 'btn btn-light btn-list';
       btn.onclick = () => {
-        // Link pubblico Google Drive per file audio
-        const audioUrl = `https://drive.google.com/uc?export=download&id=${file.id}`;
+        // Link pubblico Google Drive per file audio (visualizzazione, non download)
+        const audioUrl = `https://drive.google.com/uc?export=view&id=${file.id}`;
         let audio = document.getElementById('audio-player');
         if (!audio) {
           audio = document.createElement('audio');
